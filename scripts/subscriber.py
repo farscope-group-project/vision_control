@@ -2,6 +2,7 @@
 import rospy
 from std_msgs.msg import Bool, String, Int8
 
+# 
 
 class vision_control_node():
 
@@ -35,9 +36,14 @@ class vision_control_node():
 		elif self.controller_status > 0 and self.controller_status <= 14:
 			# take picture
 			print("Taking a picture")
-			rospy.wait_for_service('/save_images')
-
 			
+			rospy.wait_for_service('/save_images', timeout=None) #can specify a timeout in seconds to wait for the server, if timeout is exceeded ROSException is raised
+			save_images = rospy.ServiceProxy('/save_images', srv_save)
+			try:
+				resp1 = save_images([ObjectNames], frameid, shelfid) # arguments to be passed need to be defined (?)
+				except rospy.ServiceException as exc:
+					print("Service did not process request: " + str(exc)
+	
 		else:
 			# calculate item pose
 			print("Calculating Item pose")

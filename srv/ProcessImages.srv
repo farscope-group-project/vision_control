@@ -1,0 +1,11 @@
+int32 McStatus
+string ItemName
+int32 ShelfId
+geometry_msgs/Pose InterfaceJoint
+
+---
+
+int32 VisionStatus
+geometry_msgs/Pose ItemPose
+float32[] ItemBoundingBox
+
